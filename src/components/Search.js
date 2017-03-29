@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Search as SearchBar, Grid, Header } from 'semantic-ui-react'
 class Search extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
+      movies: [],
+      resultStyle: {}
     }
     this.handleChange = this.handleChange.bind(this);
-    console.log(this.state);
   }
 
   componentDidMount() {
@@ -21,11 +21,16 @@ class Search extends Component {
     .then(function (response) {
       var movies = response.data.Search
       if(movies === undefined) movies = [];
-      self.setState({movies, search});
+      if(movies.length>0){
+        var resultStyle = {
+          display: 'initial'
+        }
+      }
+      self.setState({movies, search, resultStyle});
     })
   }
   markOccurence(input, text){
-    var re = new RegExp(input,"gi");
+    var re = new RegExp(input,"i");
     var pos = text.search(re);
     var substr = text.substr(pos, input.length);
     var newstring = text.replace(re, substr.bold());
@@ -34,18 +39,18 @@ class Search extends Component {
 
   render() {
     return (
-      <div className={"search-container"}>
-        <input id={"search"} type={"search"} onChange={this.handleChange} />
-        <div className={"suggestion-container"}>
-          {this.state.movies.map((movie, i) =>
-            <li key={i} className={"search-suggestion"}>
-              <a href={"movie/" + movie.imdbID} >
-                <div dangerouslySetInnerHTML={{__html: this.markOccurence(this.state.search, movie.Title)}}></div>
-              </a>
-            </li>
-          )}
-        </div>
-      </div>
+        <Grid className='ui search'>
+          <Grid.Column width={8} >
+            <SearchBar onSearchChange={this.handleChange} showNoResults={false} />
+          </Grid.Column>
+          <div className={"results"} style={this.state.resultStyle}>
+            {this.state.movies.map((movie, i) =>
+                <a className='result' href={"movie/" + movie.imdbID} >
+                  <div dangerouslySetInnerHTML={{__html: this.markOccurence(this.state.search, movie.Title)}}></div>
+                </a>
+            )}
+          </div>
+        </Grid>
     );
   }
 }
