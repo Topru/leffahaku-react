@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Search from './Search'
 
-class Frontpage extends Component {
+class Layout extends Component {
 
   render(){
     return (
@@ -18,4 +18,4 @@ class Frontpage extends Component {
   }
 }
 
-export default Frontpage;
+export default Layout;
