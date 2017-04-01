@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Image, Header, Accordion, Icon } from 'semantic-ui-react';
+import cookie from 'react-cookie';
 
 class Movie extends Component {
 
@@ -9,7 +10,6 @@ class Movie extends Component {
     this.state = {
       movie: null
     }
-    console.log(this.state);
   }
 
   componentDidMount() {
@@ -18,14 +18,13 @@ class Movie extends Component {
     .then(function (response) {
       console.log(response);
       self.setState(response.data);
-    })
+    });
+
   }
 
 
 
   render() {
-    console.log(this.state);
-
     return (
       <Grid columns={3} divided>
         <Grid.Row>
@@ -52,6 +51,8 @@ class Movie extends Component {
                 <a href={this.state.Website}>{this.state.Title}</a>
               </Accordion.Content>
             </Accordion>
+            <Header>Viimeisimmät hakusi</Header>
+            <p></p>
           </Grid.Column>
 
         </Grid.Row>
