@@ -40,7 +40,7 @@ class Search extends Component {
   render() {
     return (
         <Grid className='ui search'>
-          <Grid.Column width={8} >
+          <Grid.Column color="blue" width={16} >
             <SearchBar onSearchChange={this.handleChange} showNoResults={false} />
           </Grid.Column>
           <div className={"results"} style={this.state.resultStyle}>
