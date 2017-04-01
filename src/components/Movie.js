@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Image, Header, Accordion, Icon } from 'semantic-ui-react';
-import cookie from 'react-cookie';
+
+import LatestSearch from './LatestSearch'
 
 class Movie extends Component {
 
@@ -16,13 +17,31 @@ class Movie extends Component {
     var self = this;
     axios.get("http://www.omdbapi.com/?i=" + this.props.params.movieID)
     .then(function (response) {
-      console.log(response);
       self.setState(response.data);
+      var lastSearches = localStorage.getItem('searches');
+      if(lastSearches === null){
+        lastSearches = [];
+      }
+      else{
+        lastSearches = JSON.parse(lastSearches);
+      }
+      var searchExists = false;
+      lastSearches.forEach(function(e){
+        if(e.MovieID === self.props.params.movieID){
+          var index = lastSearches.indexOf(e);
+          lastSearches.splice(index, 1);
+        }
+      })
+      if(lastSearches.length >= 10){
+        lastSearches.splice(0, 1);
+      }
+      if(!searchExists){
+        lastSearches.push({MovieID: self.props.params.movieID, Title: response.data.Title})
+        localStorage.setItem('searches', JSON.stringify(lastSearches));
+      }
+      console.log(localStorage.getItem('searches'))
     });
-
   }
-
-
 
   render() {
     return (
@@ -51,8 +70,7 @@ class Movie extends Component {
                 <a href={this.state.Website}>{this.state.Title}</a>
               </Accordion.Content>
             </Accordion>
-            <Header>Viimeisimmät hakusi</Header>
-            <p></p>
+            <LatestSearch/>
           </Grid.Column>
 
         </Grid.Row>
