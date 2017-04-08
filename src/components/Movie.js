@@ -21,6 +21,35 @@ class Movie extends Component {
     });
 
   }
+  
+  getStars(rating){
+    var stars = rating/2;
+      var splitStars =
+        [
+          (stars > 0) ? Math.floor(stars) : Math.ceil(stars),
+          stars % 1
+        ];
+    var starRating = '';
+    var starCount = 0;
+    for(var i=1; i<stars; i++){
+       starRating = starRating + "<i class='star icon'></i>";
+       starCount++;
+    }
+    if(splitStars[1] >= 0.75) {
+       starRating = starRating + "<i class='star icon'></i>";
+       starCount++;
+    }
+    else if(splitStars[1] >= 0.5 && splitStars[1] < 0.75) {
+        starRating = starRating + "<i class='star half empty icon'></i>";
+        starCount++;
+    }
+    while(starCount < 5) {
+        starRating = starRating + "<i class='star empty icon'></i>";
+        starCount++;
+    }
+    console.log(rating);
+    return {__html: starRating}
+  }
 
 
 
@@ -34,8 +63,9 @@ class Movie extends Component {
           </Grid.Column>
 
           <Grid.Column>
-            <Header>{this.state.Title} <small>({this.state.Runtime})</small></Header>
-            <p><b>imdb arvosana:</b> {this.state.imdbRating}</p>
+            <Header>{this.state.Title}</Header>
+            <p>{this.state.Year} - {this.state.Runtime}</p>
+            <p dangerouslySetInnerHTML={this.getStars(this.state.imdbRating)}></p>
             <p><b>Metascore: </b>{this.state.Metascore}</p>
             <p><b>Ohjaaja: </b>{this.state.Director}</p>
             <p><b>Juoni (eng): </b>{this.state.Plot}</p>
