@@ -2,24 +2,30 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Image, Header, Accordion, Icon } from 'semantic-ui-react';
 import cookie from 'react-cookie';
+import moment from 'moment';
+
 
 class Movie extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      movie: null
+        movie: null,
+        omdb: null
     }
   }
 
   componentDidMount() {
+    var apikey = '59c2234706669494497c4b06c4089a5b';
     var self = this;
+    axios.get("https://api.themoviedb.org/3/find/" + this.props.params.movieID + "?api_key=" + apikey + "&language=en-US&external_source=imdb_id")
+    .then(function (response) {
+      self.setState({movie: response.data.movie_results[0]});
+    });
     axios.get("http://www.omdbapi.com/?i=" + this.props.params.movieID)
     .then(function (response) {
-      console.log(response);
-      self.setState(response.data);
+      self.setState({omdb: response.data});
     });
-
   }
   
   getStars(rating){
@@ -47,28 +53,35 @@ class Movie extends Component {
         starRating = starRating + "<i class='star empty icon'></i>";
         starCount++;
     }
-    console.log(rating);
     return {__html: starRating}
   }
 
 
 
   render() {
+    console.log(this.state);
+    var movie = this.state.movie;
+    var omdb = this.state.omdb;
+    var basepath = 'http://image.tmdb.org/t/p';
+    if(movie === null || omdb === null) return <span></span>;
     return (
-      <Grid columns={3} divided>
+      
+      <Grid columns={3} divided className={'movie-details'}>
+      <div className={"backdrop"}><img src={basepath + '/w1920/' + movie.backdrop_path} /></div>
+      <div className={"backdrop-overlay"}></div>
         <Grid.Row>
 
-          <Grid.Column>
-            <Image src={this.state.Poster} fluid />
+          <Grid.Column className={'poster'}>
+            <Image src={basepath + '/original/' + movie.poster_path} fluid />
           </Grid.Column>
 
           <Grid.Column>
-            <Header>{this.state.Title}</Header>
-            <p>{this.state.Year} - {this.state.Runtime}</p>
-            <p dangerouslySetInnerHTML={this.getStars(this.state.imdbRating)}></p>
-            <p><b>Metascore: </b>{this.state.Metascore}</p>
-            <p><b>Ohjaaja: </b>{this.state.Director}</p>
-            <p><b>Juoni (eng): </b>{this.state.Plot}</p>
+            <Header>{movie.original_title}</Header>
+            <p>{moment(movie.release_date, 'YYYY-MM-DD').format('DD.MM.YYYY')} - {omdb.Runtime}</p>
+            <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
+            <p><b>Metascore: </b>{omdb.Metascore}</p>
+            <p><b>Ohjaaja: </b>{omdb.Director}</p>
+            <p><b>Juoni (eng): </b>{movie.overview}</p>
           </Grid.Column>
 
           <Grid.Column>
@@ -78,7 +91,7 @@ class Movie extends Component {
                 Linkkejä
               </Accordion.Title>
               <Accordion.Content>
-                <a href={this.state.Website}>{this.state.Title}</a>
+                <a href={omdb.Website}>{omdb.Title}</a>
               </Accordion.Content>
             </Accordion>
             <Header>Viimeisimmät hakusi</Header>

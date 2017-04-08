@@ -20,3 +20,36 @@ body {
   text-decoration: none;
   color: #757575;
 }
+.backdrop, .backdrop img{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-repeat: no-repeat;
+}
+.backdrop-overlay{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0.65;
+    background-color: #000;
+}
+.poster{
+    height: 75vh;
+    margin-top: 8vh;
+    width: 35vw;
+    padding-left: 4vw;
+}
+ .poster img {
+    float: right;
+    width: 100%;
+    max-width: 50vh;
+    max-height: 75vh;
+    position: relative;
+    margin-right: 1vw;
+    border-radius: 4px;
+
+ }
+
+.movie-details {
+    color: #ffffff;
+}
