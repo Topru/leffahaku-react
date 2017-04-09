@@ -39,10 +39,11 @@ class Search extends Component {
 
   render() {
     return (
-        <Grid className='ui search'>
-          <Grid.Column color="blue" width={16} >
+    <div className='title-bar'>
+        <div className='ui search search-bar'>
+          <div className='search-column'>
             <SearchBar onSearchChange={this.handleChange} showNoResults={false} />
-          </Grid.Column>
+          </div>
           <div className={"results"} style={this.state.resultStyle}>
             {this.state.movies.map((movie, i) =>
                 <a className='result' href={"/movie/" + movie.imdbID} >
@@ -50,7 +51,8 @@ class Search extends Component {
                 </a>
             )}
           </div>
-        </Grid>
+        </div>
+    </div>
     );
   }
 }

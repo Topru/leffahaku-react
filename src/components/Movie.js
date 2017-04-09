@@ -63,7 +63,7 @@ class Movie extends Component {
     var movie = this.state.movie;
     var omdb = this.state.omdb;
     var basepath = 'http://image.tmdb.org/t/p';
-    if(movie === null || omdb === null) return <span></span>;
+    if(movie === null || omdb === null) return <span>loading data</span>;
     return (
       
       <Grid columns={3} divided className={'movie-details'}>
