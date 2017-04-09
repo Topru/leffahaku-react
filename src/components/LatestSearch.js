@@ -19,13 +19,12 @@ class LatestSearch extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <Header>Viimeisimmät hakusi</Header>
           <ul>
             {this.state.lastSearches.map((search, i) =>
-              <li key={i}>{console.log(search)}<a href={search.MovieID}>{search.Title}</a></li>
+              <li key={i}><a href={search.MovieID}>{search.Title}</a></li>
             )}
           </ul>
       </div>

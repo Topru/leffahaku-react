@@ -9,7 +9,7 @@ body {
   transform: translateY(-50%);
 }
 .search-bar {
-  height: 7vh;
+  height: 60px;
   width: 80vw !important;
   margin: 0 auto !important;
 }
@@ -64,7 +64,9 @@ body {
     border-radius: 4px;
 
  }
-
+.main-container{
+  position: fixed;
+}
 .movie-details * {
     color: #ffffff !important;
     text-align: left;
@@ -82,12 +84,18 @@ body {
   background: #16171B;
   box-shadow: 1px 1px black;
   position: relative;
-  z-index: 10;
+  z-index: 9001;
 }
 .loader-container {
-    height: 93vh !important;
+    position: fixed !important;
+    height: 100vh !important;
+    width: 100vw !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: initial !important;
+    z-index: 100000;
+}
+.loader-images .dimmer {
+    transition: none !important;
 }

@@ -11,7 +11,9 @@ class Movie extends Component {
     super(props);
     this.state = {
         movie: null,
-        omdb: null
+        omdb: null,
+        backdropStatus: false,
+        posterStatus: false
     }
   }
 
@@ -49,7 +51,14 @@ class Movie extends Component {
       self.setState({omdb: response.data});
     });
   }
-  
+
+  handleBackdropLoaded(){
+    this.setState({backdropStatus: true});
+  }
+  handlePosterLoaded(){
+    this.setState({posterStatus: true});
+  }
+
   getStars(rating){
     var stars = rating/2;
       var splitStars =
@@ -83,51 +92,67 @@ class Movie extends Component {
     var movie = this.state.movie;
     var omdb = this.state.omdb;
     var basepath = 'http://image.tmdb.org/t/p';
-    if(movie === null || omdb === null) return (
+    var loaderStyle = {display: 'initial'};
+
+    if(this.state.backdropStatus && this.state.posterStatus){
+      var loaderStyle = {display: 'none'};
+    }
+
+    if(movie === null || omdb === null ) return (
       <div className="ui segment loader-container">
         <div className="ui active dimmer">
-          <div className="ui text loader">Loading</div>
+          <div className="ui text loader">Loading data</div>
         </div>
-        <p></p>
-      </div>    
+      </div>
     );
     return (
     <div>
-      <div className={"backdrop"}><img src={basepath + '/w1920/' + movie.backdrop_path} /></div>
-      <div className={"backdrop-overlay"}></div>     
-      <Grid columns={3} divided className={'movie-details centered'}>
+      <div className="ui segment loader-container loader-images" style={loaderStyle}>
+        <div className="ui active dimmer">
+          <div className="ui text loader">Loading images</div>
+        </div>
+      </div>
+      <div className='main-container'>
+        <div className={"backdrop"}>
+          <img src={basepath + '/w1920/' + movie.backdrop_path}
+               onLoad={this.handleBackdropLoaded.bind(this)}/>
+        </div>
+        <div className={"backdrop-overlay"}></div>
+        <Grid columns={3} divided className={'movie-details centered'}>
 
-        <Grid.Row>
+          <Grid.Row>
 
-          <Grid.Column className={'poster'} width={5}>
-            <Image src={basepath + '/original/' + movie.poster_path} fluid />
-          </Grid.Column>
+            <Grid.Column className={'poster'} width={5}>
+              <Image src={basepath + '/original/' + movie.poster_path}
+                     onLoad={this.handlePosterLoaded.bind(this)} fluid />
+            </Grid.Column>
 
-          <Grid.Column width={6}>
-            <Header>{movie.original_title}</Header>
-            <p>{moment(movie.release_date, 'YYYY-MM-DD').format('DD.MM.YYYY')} - {omdb.Runtime}</p>
-            <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
-            <p><b>Metascore: </b>{omdb.Metascore}</p>
-            <p><b>Ohjaaja: </b>{omdb.Director}</p>
-            <p><b>Juoni (eng): </b>{movie.overview}</p>
-          </Grid.Column>
+            <Grid.Column width={6}>
+              <Header>{movie.original_title}</Header>
+              <p>{moment(movie.release_date, 'YYYY-MM-DD').format('DD.MM.YYYY')} - {omdb.Runtime}</p>
+              <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
+              <p><b>Metascore: </b>{omdb.Metascore}</p>
+              <p><b>Ohjaaja: </b>{omdb.Director}</p>
+              <p><b>Juoni (eng): </b>{movie.overview}</p>
+            </Grid.Column>
 
-          <Grid.Column width={2}>
-            <Accordion>
-              <Accordion.Title>
-                <Icon name='dropdown' />
-                Linkkejä
-              </Accordion.Title>
-              <Accordion.Content>
-                <a href={omdb.Website}>{omdb.Title}</a>
-              </Accordion.Content>
-            </Accordion>
-            <LatestSearch/>
-          </Grid.Column>
+            <Grid.Column width={2}>
+              <Accordion>
+                <Accordion.Title>
+                  <Icon name='dropdown' />
+                  Linkkejä
+                </Accordion.Title>
+                <Accordion.Content>
+                  <a href={omdb.Website}>{omdb.Title}</a>
+                </Accordion.Content>
+              </Accordion>
+              <LatestSearch/>
+            </Grid.Column>
 
-        </Grid.Row>
+          </Grid.Row>
 
-      </Grid>
+        </Grid>
+      </div>
     </div>
     );
   }
