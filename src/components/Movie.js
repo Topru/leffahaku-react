@@ -65,17 +65,18 @@ class Movie extends Component {
     var basepath = 'http://image.tmdb.org/t/p';
     if(movie === null || omdb === null) return <span>loading data</span>;
     return (
-      
-      <Grid columns={3} divided className={'movie-details'}>
+    <div>
       <div className={"backdrop"}><img src={basepath + '/w1920/' + movie.backdrop_path} /></div>
-      <div className={"backdrop-overlay"}></div>
+      <div className={"backdrop-overlay"}></div>     
+      <Grid columns={3} divided className={'movie-details centered'}>
+
         <Grid.Row>
 
-          <Grid.Column className={'poster'}>
+          <Grid.Column className={'poster'} width={5}>
             <Image src={basepath + '/original/' + movie.poster_path} fluid />
           </Grid.Column>
 
-          <Grid.Column>
+          <Grid.Column width={6}>
             <Header>{movie.original_title}</Header>
             <p>{moment(movie.release_date, 'YYYY-MM-DD').format('DD.MM.YYYY')} - {omdb.Runtime}</p>
             <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
@@ -84,7 +85,7 @@ class Movie extends Component {
             <p><b>Juoni (eng): </b>{movie.overview}</p>
           </Grid.Column>
 
-          <Grid.Column>
+          <Grid.Column width={2}>
             <Accordion>
               <Accordion.Title>
                 <Icon name='dropdown' />
@@ -101,6 +102,7 @@ class Movie extends Component {
         </Grid.Row>
 
       </Grid>
+    </div>
     );
   }
 }
