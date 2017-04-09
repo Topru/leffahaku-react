@@ -63,7 +63,14 @@ class Movie extends Component {
     var movie = this.state.movie;
     var omdb = this.state.omdb;
     var basepath = 'http://image.tmdb.org/t/p';
-    if(movie === null || omdb === null) return <span>loading data</span>;
+    if(movie === null || omdb === null) return (
+      <div className="ui segment loader-container">
+        <div className="ui active dimmer">
+          <div className="ui text loader">Loading</div>
+        </div>
+        <p></p>
+      </div>    
+    );
     return (
     <div>
       <div className={"backdrop"}><img src={basepath + '/w1920/' + movie.backdrop_path} /></div>

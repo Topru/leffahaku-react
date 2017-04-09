@@ -9,7 +9,7 @@ body {
   transform: translateY(-50%);
 }
 .search-bar {
-  height: 50px;
+  height: 7vh;
   width: 80vw !important;
   margin: 0 auto !important;
 }
@@ -34,12 +34,14 @@ body {
   color: #757575;
 }
 .backdrop, .backdrop img{
+    position: fixed !important;
     width: 100vw;
     height: 100vh;
     position: absolute;
     background-repeat: no-repeat;
 }
 .backdrop-overlay{
+    position: fixed !important;
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -77,8 +79,15 @@ body {
   margin-top: 5vh !important;
 }
 .title-bar {
-background: #16171B;
-box-shadow: 1px 1px black;
-position: relative;
-z-index: 10;
+  background: #16171B;
+  box-shadow: 1px 1px black;
+  position: relative;
+  z-index: 10;
+}
+.loader-container {
+    height: 93vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: initial !important;
 }
