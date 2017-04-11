@@ -123,17 +123,17 @@ class Movie extends Component {
             }
         </div>
         <div className={"backdrop-overlay"}></div>
-        <Grid columns={3} divided className={'movie-details centered'} relaxed>
+        <Grid columns={3} className={'movie-details centered'} relaxed>
 
           <Grid.Row>
-            <Grid.Column className={'poster'} width={1} padded>
+            <Grid.Column className={'poster'} width={1}>
             </Grid.Column>
-            <Grid.Column className={'poster'} width={4} padded>
+            <Grid.Column className={'poster'} width={4}>
               <Image src={omdb.Poster}
                      onLoad={this.handlePosterLoaded.bind(this)} fluid />            
             </Grid.Column>
 
-            <Grid.Column width={5} padded>
+            <Grid.Column width={5}>
               <Header>{omdb.Title}</Header>
               <p>{omdb.Released} - {omdb.Runtime}</p>
               <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
@@ -142,7 +142,7 @@ class Movie extends Component {
               <p><b>Juoni (eng): </b>{omdb.Plot}</p>
             </Grid.Column>
 
-            <Grid.Column padded>
+            <Grid.Column>
               <Accordion>
                 <Accordion.Title>
                   <Icon name='dropdown' />
