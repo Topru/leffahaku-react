@@ -95,7 +95,7 @@ body {
     padding: 0 !important;
     border: 0 !important;
     border-radius: initial !important;
-    z-index: 100000;
+    z-index: 9000;
 }
 .loader-images .dimmer {
     transition: none !important;

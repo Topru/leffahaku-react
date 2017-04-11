@@ -26,6 +26,10 @@ class Movie extends Component {
     });
     axios.get("http://www.omdbapi.com/?i=" + this.props.params.movieID)
     .then(function (response) {
+      if(response.data.Response == "False") {
+          self.setState({omdb: false});
+          return;
+      }
       var lastSearches = localStorage.getItem('searches');
       if(lastSearches === null){
         lastSearches = [];
@@ -99,6 +103,13 @@ class Movie extends Component {
     } else if(typeof movie == "undefined") {
       var loaderStyle = {display: 'none'};
     }
+    if(omdb === false) return (
+      <div className="ui segment loader-container">
+        <div className="ui active dimmer">
+          <div className="ui text loader">Error loading data</div>
+        </div>
+      </div>
+    );
 
     if(movie === null || omdb === null ) return (
       <div className="ui segment loader-container">

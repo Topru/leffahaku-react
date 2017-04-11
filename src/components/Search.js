@@ -46,7 +46,7 @@ class Search extends Component {
           </div>
           <div className={"results"} style={this.state.resultStyle}>
             {this.state.movies.map((movie, i) =>
-                <a className='result' href={"/movie/" + movie.imdbID} >
+                <a key={i} className='result' href={"/movie/" + movie.imdbID} >
                   <div dangerouslySetInnerHTML={{__html: this.markOccurence(this.state.search, movie.Title)}}></div>
                 </a>
             )}
