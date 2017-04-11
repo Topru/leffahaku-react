@@ -93,8 +93,10 @@ class Movie extends Component {
     var omdb = this.state.omdb;
     var basepath = 'http://image.tmdb.org/t/p';
     var loaderStyle = {display: 'initial'};
-
+    //console.log(typeof movie.poster_path);
     if(this.state.backdropStatus && this.state.posterStatus){
+      var loaderStyle = {display: 'none'};
+    } else if(typeof movie == "undefined") {
       var loaderStyle = {display: 'none'};
     }
 
@@ -114,29 +116,33 @@ class Movie extends Component {
       </div>
       <div className='main-container'>
         <div className={"backdrop"}>
+            {console.log(typeof movie)}
+            {typeof movie !== "undefined" &&
           <img src={basepath + '/w1920/' + movie.backdrop_path}
                onLoad={this.handleBackdropLoaded.bind(this)}/>
+            }
         </div>
         <div className={"backdrop-overlay"}></div>
-        <Grid columns={3} divided className={'movie-details centered'}>
+        <Grid columns={3} divided className={'movie-details centered'} relaxed>
 
           <Grid.Row>
-
-            <Grid.Column className={'poster'} width={5}>
-              <Image src={basepath + '/original/' + movie.poster_path}
-                     onLoad={this.handlePosterLoaded.bind(this)} fluid />
+            <Grid.Column className={'poster'} width={1} padded>
+            </Grid.Column>
+            <Grid.Column className={'poster'} width={4} padded>
+              <Image src={omdb.Poster}
+                     onLoad={this.handlePosterLoaded.bind(this)} fluid />            
             </Grid.Column>
 
-            <Grid.Column width={6}>
-              <Header>{movie.original_title}</Header>
-              <p>{moment(movie.release_date, 'YYYY-MM-DD').format('DD.MM.YYYY')} - {omdb.Runtime}</p>
+            <Grid.Column width={5} padded>
+              <Header>{omdb.Title}</Header>
+              <p>{omdb.Released} - {omdb.Runtime}</p>
               <p dangerouslySetInnerHTML={this.getStars(omdb.imdbRating)}></p>
               <p><b>Metascore: </b>{omdb.Metascore}</p>
               <p><b>Ohjaaja: </b>{omdb.Director}</p>
-              <p><b>Juoni (eng): </b>{movie.overview}</p>
+              <p><b>Juoni (eng): </b>{omdb.Plot}</p>
             </Grid.Column>
 
-            <Grid.Column width={2}>
+            <Grid.Column padded>
               <Accordion>
                 <Accordion.Title>
                   <Icon name='dropdown' />
