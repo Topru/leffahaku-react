@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: rgba(0,0,0,.85);
+  color:#FFF;
 }
 .search-column {
   position: relative;
@@ -11,7 +13,7 @@ body {
 .search-bar {
   height: 60px;
   width: 80vw !important;
-  margin: 0 auto !important;
+  margin:0 auto !important;
 }
 .search-bar .input, .search-bar input{
   width: 80vw !important;
@@ -20,7 +22,7 @@ body {
 }
 .results{
     width: 80vw !important;
-    margin: 0 auto !important;
+    margin:0 auto !important;
 }
 .suggestion-container {
   margin-top: 5px;
@@ -99,4 +101,24 @@ body {
 }
 .loader-images .dimmer {
     transition: none !important;
+}
+h1.ui.header {
+  font-size:5em;
+}
+.mastheader {
+  margin-top:1em !important;
+  margin-bottom:1em !important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color:#FFF;
+}
+.content {
+  width:90%;
+  margin: 0 auto;
+}
+
+.search-column > .search {
+  display:inline-block;
+  width:90%;
 }

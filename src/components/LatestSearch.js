@@ -21,7 +21,6 @@ class LatestSearch extends Component {
   render() {
     return (
       <div>
-        <Header>Viimeisimmät hakusi</Header>
           <ul>
             {this.state.lastSearches.map((search, i) =>
               <li key={i}><a href={search.MovieID}>{search.Title}</a></li>

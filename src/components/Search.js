@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Search as SearchBar, Grid, Header } from 'semantic-ui-react'
+import { Search as SearchBar, Grid, Header, Icon } from 'semantic-ui-react'
 class Search extends Component {
 
   constructor(props) {
@@ -40,8 +40,10 @@ class Search extends Component {
   render() {
     return (
     <div className='title-bar'>
+      <div className="search-container">
         <div className='ui search search-bar'>
           <div className='search-column'>
+            <a className="home-link" href="/"><Icon size="big" color='grey' inverted link name='home' /></a>
             <SearchBar onSearchChange={this.handleChange} showNoResults={false} />
           </div>
           <div className={"results"} style={this.state.resultStyle}>
@@ -51,6 +53,7 @@ class Search extends Component {
                 </a>
             )}
           </div>
+        </div>
         </div>
     </div>
     );

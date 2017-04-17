@@ -141,7 +141,7 @@ class Movie extends Component {
             </Grid.Column>
             <Grid.Column className={'poster'} width={4}>
               <Image src={omdb.Poster}
-                     onLoad={this.handlePosterLoaded.bind(this)} fluid />            
+                     onLoad={this.handlePosterLoaded.bind(this)} fluid />
             </Grid.Column>
 
             <Grid.Column width={5}>
@@ -163,6 +163,7 @@ class Movie extends Component {
                   <a href={omdb.Website}>{omdb.Title}</a>
                 </Accordion.Content>
               </Accordion>
+              <Header>Viimeisimmät hakusi</Header>
               <LatestSearch/>
             </Grid.Column>
 
