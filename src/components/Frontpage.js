@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Search as SearchBar, Grid, Header, Icon, Container, List } from 'semantic-ui-react'
+import { Grid, Header, Icon, Container, List } from 'semantic-ui-react'
 
-import Search from './Search'
 import LatestSearch from './LatestSearch'
 
 class Frontpage extends Component {

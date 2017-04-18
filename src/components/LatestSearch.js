@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Grid, Image, Header, Accordion, Icon } from 'semantic-ui-react';
 
 class LatestSearch extends Component {
 

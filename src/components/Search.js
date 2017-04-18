@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Search as SearchBar, Grid, Header, Icon } from 'semantic-ui-react'
+import { Search as SearchBar, Icon } from 'semantic-ui-react'
 class Search extends Component {
 
   constructor(props) {

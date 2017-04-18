@@ -25,7 +25,7 @@ class Movie extends Component {
     });
     axios.get("http://www.omdbapi.com/?i=" + this.props.params.movieID)
     .then(function (response) {
-      if(response.data.Response == "False") {
+      if(response.data.Response === "False") {
           self.setState({omdb: false});
           return;
       }
@@ -72,35 +72,35 @@ class Movie extends Component {
     var starRating = '';
     var starCount = 0;
     for(var i=1; i<stars; i++){
-       starRating = starRating + "<i class='star icon'></i>";
+       starRating += "<i class='star icon'></i>";
        starCount++;
     }
     if(splitStars[1] >= 0.75) {
-       starRating = starRating + "<i class='star icon'></i>";
+       starRating += "<i class='star icon'></i>";
        starCount++;
     }
     else if(splitStars[1] >= 0.5 && splitStars[1] < 0.75) {
-        starRating = starRating + "<i class='star half empty icon'></i>";
+        starRating += "<i class='star half empty icon'></i>";
         starCount++;
     }
     while(starCount < 5) {
-        starRating = starRating + "<i class='star empty icon'></i>";
+        starRating += "<i class='star empty icon'></i>";
         starCount++;
     }
     return {__html: starRating}
   }
 
   render() {
-    console.log(this.state);
+      console.log(this.state);
     var movie = this.state.movie;
     var omdb = this.state.omdb;
     var basepath = 'http://image.tmdb.org/t/p';
     var loaderStyle = {display: 'initial'};
     //console.log(typeof movie.poster_path);
     if(this.state.backdropStatus && this.state.posterStatus){
-      var loaderStyle = {display: 'none'};
-    } else if(typeof movie == "undefined") {
-      var loaderStyle = {display: 'none'};
+      loaderStyle = {display: 'none'};
+    } else if(typeof movie === "undefined") {
+      loaderStyle = {display: 'none'};
     }
     if(omdb === false) return (
       <div className="ui segment loader-container">
@@ -128,8 +128,9 @@ class Movie extends Component {
         <div className={"backdrop"}>
             {console.log(typeof movie)}
             {typeof movie !== "undefined" &&
-          <img src={basepath + '/w1920/' + movie.backdrop_path}
-               onLoad={this.handleBackdropLoaded.bind(this)}/>
+              <img src={basepath + '/w1920/' + movie.backdrop_path}
+                   onLoad={this.handleBackdropLoaded.bind(this)}
+                   alt={''}/>
             }
         </div>
         <div className={"backdrop-overlay"}></div>
@@ -139,8 +140,11 @@ class Movie extends Component {
             <Grid.Column className={'poster'} width={1}>
             </Grid.Column>
             <Grid.Column className={'poster'} width={4}>
+            {omdb.Poster !== "N/A" &&
               <Image src={omdb.Poster}
-                     onLoad={this.handlePosterLoaded.bind(this)} fluid />
+                     onLoad={this.handlePosterLoaded.bind(this)} fluid 
+                     alt={"poster"} />
+            }
             </Grid.Column>
 
             <Grid.Column width={5}>
