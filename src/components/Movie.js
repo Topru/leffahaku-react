@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Image, Header, Accordion, Icon } from 'semantic-ui-react';
-import moment from 'moment';
 
 import LatestSearch from './LatestSearch'
 

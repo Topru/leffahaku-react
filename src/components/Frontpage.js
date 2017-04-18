@@ -61,10 +61,6 @@ class Frontpage extends Component {
                 <List.Content><a href="https://www.npmjs.com/package/react-axios">Axios</a></List.Content>
               </List.Item>
               <List.Item>
-                <List.Icon name='book' />
-                <List.Content><a href="https://www.npmjs.com/package/react-moment">Moment</a></List.Content>
-              </List.Item>
-              <List.Item>
               </List.Item>
 
               <List.Item>
