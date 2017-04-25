@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router';
 class LatestSearch extends Component {
 
   constructor(props) {
@@ -21,7 +21,7 @@ class LatestSearch extends Component {
       <div>
           <ul>
             {this.state.lastSearches.map((search, i) =>
-              <li key={i}><a href={search.MovieID}>{search.Title}</a></li>
+              <li key={i}><Link to={"movie/" + search.MovieID}>{search.Title}</Link></li>
             )}
           </ul>
       </div>

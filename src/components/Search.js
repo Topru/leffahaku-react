@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Search as SearchBar, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router';
 class Search extends Component {
 
   constructor(props) {
@@ -43,7 +44,7 @@ class Search extends Component {
       <div className="search-container">
         <div className='ui search search-bar'>
           <div className='search-column'>
-            <a className="home-link" href="/"><Icon size="big" color='grey' inverted link name='home' /></a>
+            <Link className="home-link" to="/"><Icon size="big" color='grey' inverted link name='home' /></Link>
             <SearchBar onSearchChange={this.handleChange} showNoResults={false} />
           </div>
           <div className={"results"} style={this.state.resultStyle}>
