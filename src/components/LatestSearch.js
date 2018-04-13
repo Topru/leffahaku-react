@@ -21,7 +21,7 @@ class LatestSearch extends Component {
       <div>
           <ul>
             {this.state.lastSearches.map((search, i) =>
-              <li key={i}><Link to={"movie/" + search.MovieID}>{search.Title}</Link></li>
+              <li key={i}><a href={"/movie/" + search.MovieID}>{search.Title}</a></li>
             )}
           </ul>
       </div>
