@@ -18,7 +18,7 @@ class Search extends Component {
   handleChange(event){
     var self = this;
     var search = event.target.value;
-    axios.get("http://www.omdbapi.com/?s=" + search)
+    axios.get("http://www.omdbapi.com/?apikey=6e0f5458&s=" + search)
     .then(function (response) {
       var movies = response.data.Search
       if(movies === undefined) movies = [];

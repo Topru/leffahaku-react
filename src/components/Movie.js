@@ -23,7 +23,7 @@ class Movie extends Component {
     .then(function (response) {
       self.setState({movie: response.data.movie_results[0]});
     });
-    axios.get("http://www.omdbapi.com/?i=" + this.props.params.movieID)
+    axios.get("http://www.omdbapi.com/?apikey=6e0f5458&i=" + this.props.params.movieID)
     .then(function (response) {
       if(response.data.Response === "False") {
           self.setState({omdb: false});
@@ -126,9 +126,9 @@ class Movie extends Component {
       </div>
       <div className='main-container'>
         <div className={"backdrop"}>
-            {console.log(typeof movie)}
+            {console.log(movie)}
             {typeof movie !== "undefined" &&
-              <img src={basepath + '/w1920/' + movie.backdrop_path}
+              <img src={basepath + '/original/' + movie.backdrop_path}
                    onLoad={this.handleBackdropLoaded.bind(this)}
                    alt={''}/>
             }
